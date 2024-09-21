@@ -1,0 +1,126 @@
+{%extends "Base.html"%}
+{% block title %}Honyaku{%endblock%}
+{% block title2 %}翻訳君{%endblock%}
+{% block content %}
+
+<main class="content">
+    <div class="bubbles">
+    <article class="article">
+      <div class="article-container">
+        <h1 class="article-title">理系論文翻訳アプリ「翻訳くん」</h1>
+        <div class="work-show__info flex">
+          <div class="work-show__overview lt1 overview"><h2 class="overview_h1">OVERVIEW</h2>
+            
+            
+
+            <div>
+              <p>
+                本作品は理系論文を読む際に日本語に翻訳し概要を掴むための翻訳プログラム。
+                理系論文を丸ごと翻訳したときにありがちな数式のズレを克服した。
+              </p>
+              
+            </div>
+
+          </div>
+          
+        </div>
+
+          
+          <h3 class="work_h3">Git-URL</h3>
+          <p><a href="https://github.com/SYutaroT/honyaku" target="_blank" rel="noopener">https://github.com/SYutaroT/honyaku</a></p>
+          <h3 class="work_h3">担当</h3>
+          <p>企画から設計まで</p>
+          <h3 class="work_h3">ターゲット</h3>
+          <p>100%自分</p>
+
+          <h3 class="work_h3">作成理由</h3>
+          
+            
+          <figure class="image-container">
+            <img src="{{ url_for('static', filename='img/Deeple_pdf.png') }}" class="img">
+            <figcaption class="img-caption">DeepL翻訳のPDF<br>数式がぐちゃぐちゃになっている</figcaption>
+        </figure>
+        
+          <p>4回生になり、研究が本格化しはじめ、学会論文などを読む機会が増えてきた。
+            読むべきアカデミックな論文はそのほとんどが英語で書かれており、英語アレルギーの私としては大変苦心させられることになった。
+            そこで学生の強い味方であるDeepL翻訳のPDFを丸ごと翻訳してくれる機能を用いて疑似日本語論文を作成したのが、
+            完成したPDFを見てがっかりした。そこにはうまく処理できなかった式がぐちゃぐちゃに配置された、混沌としたPDFがあった。
+            とても読めたものではない。
+            ならば1行づつ翻訳していけばいいのではないか。
+            私はそれができるほどマメな男ではなかった。
+            ならば英語で辞書を引きながら読めるようになるのはどうだろうか。
+            私はそれができるほど勤勉な男ではなかった。
+            そこで数式のズレが起きない翻訳機を自作することにした。
+          
+          </p>
+          <div class="clearfix"></div>
+          <div>
+            <h3 class="work_h3">プログラミング</h3>
+            <p>
+                このアプリはPythonを用いて作成することにした。その理由は私が最も勉強した言語であること、そしてライブラリが充実している点だ。単純に翻訳アプリを作るのは無謀なので、既存ライブラリを組み合わせることで実現させる。
+            </p>
+            <p>
+                動作の構想はPDFをtxt形式に変換し、Deepl翻訳のAPIを利用して投げた文を翻訳することにした。
+            </p>
+        
+            <h4>PDFの変換</h4>
+            <p>
+                論文を翻訳するにあたって最初に必要なことはPDFからテキストデータを抜き取ることである。PythonではPDFを扱うライブラリが数多く存在するが、様々なものを試し「Nougat」を採用することにした。これはPDFをLatex形式に変換するライブラリで、数式を扱う今回の翻訳機では適任だった。
+            </p>
+        
+            <h4>数式ズレの回避</h4>
+            <p>
+                数式ズレの回避だが、これは数式をDeepL翻訳が扱えないことに起因する。そのため翻訳する際に数式を除外すれば回避できる。
+                <br>
+                そこでLatex形式英文の数式を配列にいれ、元の場所に目印として「QJAAA~~QJZZZ」「QEAAA~QEZZZ」を順に置いていき、翻訳後にまた置き換えるという手法で数式の翻訳を回避することにした。目印が2種類存在するのは文中の式と別行立ての式を別々の配列に入れるためである。このアイデアは下のサイトを参考にした。
+                <br><a href="https://qiita.com/hook125/items/df5cdd2a82d964ffe3dd">参照元</a>
+            </p>
+        
+            <h4>実際の動作と問題点</h4>
+            <p>
+                ある程度自然な翻訳にするために1パラグラフずつDeepl翻訳に投げることとし、PDFを読み込み翻訳しLatex形式を再度PDFとして出力させた。しかしここで2つの問題が発生した。それは目印「QE～」が翻訳機にかけると変な日本語として出力されることと、PDFが出力できずプログラムが強制停止することだ。
+            </p>
+        
+            <h4>辞書機能の追加</h4>
+            <p>
+                1つ目の問題はDeeplAPIの辞書機能を用いることで解決した。これはあらかじめ翻訳しない単語をcsvにまとめておくという機能だ。日本語でのチュートリアルが存在しなかったので、この辞書機能をどうプログラムに組み込むかでかなり苦労させられた。
+            </p>
+        
+            <h4>全自動から半自動へ</h4>
+            <p>
+                2つ目の問題はプログラムの問題というより、「Nougat」の精度がそこまで高くなく、変なLatex形式に変換することで引き起こされていることが分かった。そこでLatex形式で出力し、そのLatexを手動でコンパイルすることでPDFを作ることにした。この手法だと例えばうまくPDF化できない場合でも最悪手動Latexファイルをいじり直すことができる。変に頼りきりにしてはいけない。この時点で自動というコンセプトは崩壊したが、このプログラムが無になるより半自動で完成させたほうが良いと考えたからここは飲み込むことにした。
+            </p>
+        
+            <p>
+                他にもLatex形式からPDFに変換する場合に#などの記号が文中にあるとコンパイルできないなどの問題が発生したが一括置換で何とかすることにした。こうして一応実用化に耐えうる翻訳アプリが完成させることができた。これを「翻訳くん」と名付けた。
+                出力前のPDFと出力後のPDFは<a href="https://d.kuku.lu/6m7u563th">こちら</a>(Password:Honyaku2)
+            </p>
+            
+        </div>
+        
+          
+          
+            <h3 class="work_h3">翻訳くんの現状と今後</h3>
+            
+            翻訳くんの今後のビジョンとして完全な全自動の実現を目標にしたい。その手法として1つ考えているのがChatGDPの連携だ。出力されたLatexをChatGDPにAPIで流すことで自動修復できるのではいう構想はある。しかしChatGDPの精度とDeepl＋ChatGDPで二重にお金を取られることを考えたら、いったんこのままでもいいかな。
+        </div>
+        <div class="movie">
+          <div class="video-container">
+          <div class="video-caption">翻訳くんの動作確認</div>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/HpjkN9Bk1zo?si=oWTSjeaWVR1bVZne" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>  
+        <div class="home-link">
+          <a href="./#works">Works一覧へ</a>
+        </div>
+      </div>
+      
+    </article>
+
+    <div class="page-top" id="js-page-top">
+      <span class="material-icons-outlined">expand_less</span>
+    </div>
+  </main>
+
+
+{% endblock%}

@@ -1,0 +1,115 @@
+{%extends "Base.html"%}
+{% block title %}Jimonet{%endblock%}
+{% block title2 %}ジモマップ{%endblock%}
+{% block content %}
+
+<main class="content">
+    <div class="bubbles">
+    <article class="article">
+      <div class="article-container">
+        <h1 class="article-title">商店街活性化応援アプリ「ジモマップ」</h1>
+        <div class="work-show__info flex">
+          <div class="work-show__overview lt1 overview"><h2 class="overview_h1">OVERVIEW</h2>
+            
+            
+
+            <div>
+              <p>
+                本作品は株式会社Relicの開発体験型インターンシップで、チーム開発したもの。
+                商店街の活性化を目的に、情報発信を目的として作成した。
+              </p>
+              
+            </div>
+
+          </div>
+          
+        </div>
+
+          
+          <h3 class="work_h3">Git-URL</h3>
+          <p><a href="https://github.com/SYutaroT/honyaku" target="_blank" rel="noopener">https://github.com/SYutaroT/honyaku</a></p>
+          <h3 class="work_h3">担当</h3>
+          <p>フロントエンド、バックエンドの一部</p>
+          <h3 class="work_h3">ターゲット</h3>
+          <p>商店街の人々(お知らせや魅力の発信)</p>
+
+          <h3 class="work_h3">作成理由</h3>
+                  
+          <p>
+            Relicさんの5日間開発体験型インターンシップに参加した際に作成した。
+            開発するもののテーマは「地域課題を解決するWebアプリケーションの開発」であった。
+            まず、チーム(3人)でどのような課題に焦点を当てるかを話し合った結果、近所の商店街にお客さんが少ないことを解決することにした。
+
+            小さな商店街はホームページを持っていない、ネットで検索してもヒットしない、商店街の魅力が分からない等様々な課題を抱えており、
+            これを解決するために、「地域商店街の情報発信」を主軸に置いたWebアプリケーションを作成することになった。
+          </p>
+          <h3 class="work_h3">担当場所と理由</h3>
+                  
+          <p>
+            今回のWebアプリケーション開発にはPHPのフレームワークであるLaravelを使用するというルールだったのだが、
+            チームにLaravel経験者が一人もおらず、チームの中で唯一HTML/CSS経験者である私が、基本的にフロントエンドを担当し
+            他２人がデータベースやログインなどのWebアプリケーションらしい点を担当することになった。
+          </p>
+          
+          <div class="clearfix"></div>
+          <div>
+            <h3 class="work_h3">ページの構成と主な機能</h3>
+            <p></p>
+            <h4>トップページ</h4>
+            <p>
+                ジモマップのトップページ。写真から見たい商店街を選択する。今回は3つの選択肢を用意している。
+            </p>
+        
+            <h4>商店街ページ</h4>
+            <p>特定の商店街について紹介するページ。機能として大まかに「マップ」「お知らせ」「アクセス」の3つがある。
+                <br>
+                「マップ」では商店街の並びやお店をイラストマップで再現しており、それぞれのアイコンをクリックすることでそのお店のページに飛ぶことができる。
+<br>「お知らせ」では商店街からのお知らせを見ることができる。
+<br>「アクセス」では商店街までの経路、最寄りの交通機関を知ることができる。またGoogleMAPが埋め込んであるので、よりアクセスしやすくなっている。
+            </p>
+
+            <h4>管理者ページ</h4>
+            <p>
+               ここ以降には、商店街のスタッフのみがアクセス想定で、ユーザ認証が必要になる。<br>
+               
+               商店街のページごとに表示するお知らせの編集を行うページにつながっている。
+            </p>
+            <h4>お知らせ編集ページ</h4>
+            <p>
+               ここでは「お知らせ」ページに表示するお知らせを編集することができる。追加、削除、編集を簡単に行うことができるようになっている。
+               
+            </p>
+
+        </div>
+        
+          
+          
+            <h3 class="work_h3">開発を終えて</h3>
+            
+            5日間という短い時間で、GitやLaravelなど初体験に戸惑いつつも、実際に作動するものが開発できたのはとても良かった。
+            また、社員の方からのフィードバックも、「実装できる機能に焦点を当てて、現実的に開発を進めていた」と、地に足ついた開発であったと思う。
+            またチームワークも全チームで最も評価された。
+            反面、フロントエンドのセンスのなさも指摘されたので、そこを改善できるようになりたいとも思った。
+
+            <br>全体を通して有意義な開発経験だった。
+        </div>
+        <div class="movie">
+          <div class="video-container">
+          <div class="video-caption">ジモマップの動作確認</div>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/HpjkN9Bk1zo?si=oWTSjeaWVR1bVZne" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>  
+        <div class="home-link">
+          <a href="./#works">Works一覧へ</a>
+        </div>
+      </div>
+      
+    </article>
+
+    <div class="page-top" id="js-page-top">
+      <span class="material-icons-outlined">expand_less</span>
+    </div>
+  </main>
+
+
+{% endblock%}

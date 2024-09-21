@@ -1,0 +1,67 @@
+{%extends "Base.html"%}
+{% block title %}Research{%endblock%}
+{% block title2 %}研究内容{%endblock%}
+{% block content %}
+
+<main class="content">
+
+    <article class="article">
+      <div class="article-container">
+        <h1 class="article-title">研究テーマ：「深層展開」</h1>
+        <div class="work-show__info flex">
+          <div class="work-show__overview lt1 overview">
+          <h2 class="overview_h1">OVERVIEW</h2>
+
+<div >
+<p class=""> ここでは私の研究テーマである「深層展開」について、簡単にまとめる。</p>
+</div>
+          
+          
+            <p class="work-show__abstract"></p>
+          </div>
+        </div>
+         <h3 class="work_h3">深層展開~概要~</h3>
+         <p>
+          最適化問題と呼ばれる特定の集合上で定義された実数値関数
+          または整数値関数についてその値が最小（もしくは最大）となる状態を解析する問題が存在する。
+          それを解くための手法が最適化手法であり、有名どころに「再急降下法」や「ニュートン法」などがある。<br>
+          深層展開は機械学習を用いた最適化手法の1つで、モデルベース設計と機械学習の双方の利点を併せ持っているとさている。
+          
+     </p>
+         <img src="{{ url_for('static', filename='img/最適化手法.png') }}" alt="saiteki">
+         <h3 class="work_h3">深層展開~アルゴリズム~</h3>
+         <p>深層展開は反復型アルゴリズムの計算過程を深層ニューラルネットワークに見立てて、埋め込んだ内部パラメータの
+          調整を行うことで最適化する。</p>
+         <img src="{{ url_for('static', filename='img/アルゴリズム.png') }}" alt="arugo">
+        
+       <h3 class="work_h3">研究内容</h3>
+       <p>この深層展開をPythonのPythorchと呼ばれるフレームワークを用いて実装していくのが大まかな研究内容で、その中でも私はこの深層展開を用いて
+        「イベントトリガ制御系の同時設計」に挑戦している。ここからはイベントトリガ制御系について簡単に説明する。</p>
+
+       <h3 class="work_h3">イベントトリガ制御系</h3>
+<p>現在はタイムトリガ制御と呼ばれる制御手法が主流である。これは
+センサが観測した制御対象の状態から周期的に制御入力を更新する手法で、理論的な実装が容易であるというメリットがある。
+しかし、制御入力を更新する必要がない場合でもセンサから情報を受け取るため無駄な通信コストがかかってしまう。
+そこで考案されたのが
+イベントトリガ制御である。これはある条件を満たした場合のみセンサから状態を送信するという手法で、
+省エネルギが求められる現代において、注目を集めている。</p>
+<h3 class="work_h3">研究のモチベーション</h3>
+<p>
+イベントトリガ制御系は、通信タイミングを決定するイベントトリガと、制御入力を決定するコントローラという2つの設計対象が存在する。
+それらは挙動が互いの動作に依存しており"Dual effect"と呼ばれる制御信号の影響によって最適制御を考えるのが非常に難しいとされている。
+従来法ではコントローラとイベントトリガをある仮定の下分離して設計していたが、最適性が犠牲になっていた。
+<br>そこで本研究では深層展開を用いてイベントトリガとコントローラを同時に設計することでイベントトリガ制御系の最適制御を実現することを目的としている。
+</p>
+<img src="{{ url_for('static', filename='img/イベントトリガ.png') }}" alt="Event">
+<div id="result">
+<h3 class="work_h3">研究成果</h3>
+<p>
+<h4>SCI(システム制御情報学会研究発表講演会)論文「深層展開を用いたイベントトリガ制御系設計」</h4>
+<p>J-Stageへのリンクは<a href='https://www.jstage.jst.go.jp/article/sci/SCI24/0/SCI24_365/_article/-char/ja'  class="Rink">こちら</a>
+</p>
+</div>
+</div>
+</article>
+
+    
+{% endblock%}
